@@ -9,6 +9,8 @@
 
 package org.projectfloodlight.openflow.protocol.ver13;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.projectfloodlight.openflow.protocol.*;
 import org.projectfloodlight.openflow.protocol.action.*;
 import org.projectfloodlight.openflow.protocol.actionid.*;
@@ -32,6 +34,7 @@ abstract class OFOxmVer13 {
     final static byte WIRE_VERSION = 4;
     final static int MINIMUM_LENGTH = 4;
 
+    private static final Logger logger = LoggerFactory.getLogger(OFOxmVer13.class);
 
     public final static OFOxmVer13.Reader READER = new Reader();
 
@@ -524,6 +527,9 @@ abstract class OFOxmVer13 {
                case (int) 0x80004d10:
                    // discriminator value 0x80004d10L=0x80004d10L for class OFOxmTunnelIdMaskedVer13
                    return OFOxmTunnelIdMaskedVer13.READER.readFrom(bb);
+               case (int) 0x14204:
+                   logger.warn("ofoxmVer13 encountered 0x14204 as typelen; returning null here");
+                   return null;
                default:
                    throw new OFParseError("Unknown value for discriminator typeLen of class OFOxmVer13: " + typeLen);
             }
