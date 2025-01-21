@@ -273,7 +273,7 @@ class OFGroupRemoveBucketVer15 implements OFGroupRemoveBucket {
         else if(commandBucketId.equals(OFGroupBucket.BUCKET_LAST))
             buckets.remove(buckets.size()-1);
         else if(commandBucketId.equals(OFGroupBucket.BUCKET_ALL))
-            buckets.removeAll(buckets);
+            buckets.clear();
         return buckets;
     }
 
@@ -425,7 +425,7 @@ class OFGroupRemoveBucketVer15 implements OFGroupRemoveBucket {
         else if(commandBucketId.equals(OFGroupBucket.BUCKET_LAST))
             buckets.remove(buckets.size()-1);
         else if(commandBucketId.equals(OFGroupBucket.BUCKET_ALL))
-            buckets.removeAll(buckets);
+            buckets.clear();
         return buckets;
     }
 
