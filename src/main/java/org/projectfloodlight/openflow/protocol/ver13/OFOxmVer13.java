@@ -26,7 +26,8 @@ import org.projectfloodlight.openflow.types.*;
 import org.projectfloodlight.openflow.util.*;
 import org.projectfloodlight.openflow.exceptions.*;
 import io.netty.buffer.ByteBuf;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 abstract class OFOxmVer13 {
     // version: 1.3
     final static byte WIRE_VERSION = 4;
@@ -34,7 +35,7 @@ abstract class OFOxmVer13 {
 
 
     public final static OFOxmVer13.Reader READER = new Reader();
-
+    private static final Logger logger = LoggerFactory.getLogger(OFOxmVer13.class);
     static class Reader implements OFMessageReader<OFOxm<?>> {
         @Override
         public OFOxm<?> readFrom(ByteBuf bb) throws OFParseError {
@@ -665,6 +666,9 @@ abstract class OFOxmVer13 {
                case (int) 0x80004d10:
                    // discriminator value 0x80004d10L=0x80004d10L for class OFOxmTunnelIdMaskedVer13
                    return OFOxmTunnelIdMaskedVer13.READER.readFrom(bb);
+	       case (int) 0x14204:
+		   logger.warn("ofOxmVer13 encounter 0x14204 as typeLen; returning null here");
+		   return null;
                default:
                    throw new OFParseError("Unknown value for discriminator typeLen of class OFOxmVer13: " + typeLen);
             }

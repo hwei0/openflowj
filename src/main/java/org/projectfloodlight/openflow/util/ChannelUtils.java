@@ -64,6 +64,10 @@ public class ChannelUtils {
             logger.trace("readList(length={}, reader={})", length, reader.getClass());
         while(bb.readerIndex() < end) {
             T read = reader.readFrom(bb);
+            if (read == null) {
+                logger.warn("read element is nulll; not including.");
+                continue;
+            }
             if(logger.isTraceEnabled())
                 logger.trace("readList: read={}, left={}", read, end - bb.readerIndex());
             builder.add(read);
